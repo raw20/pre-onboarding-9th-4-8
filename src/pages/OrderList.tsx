@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Heading, VStack } from '@chakra-ui/react';
 import useFetch from '@/lib/hooks/useFetch';
 import { API_URL } from '@/constants/url';
 import OrderListTable from '@/components/OrderListTable';
+import TablePagination from '@/components/TablePagination';
 
 const OrderList = () => {
   const [orderListData, isLoading, isError] = useFetch<IOrderList[]>(
@@ -21,6 +22,7 @@ const OrderList = () => {
         </Heading>
       </Box>
       <OrderListTable orderListData={orderListData} />
+      <TablePagination />
     </VStack>
   );
 };
