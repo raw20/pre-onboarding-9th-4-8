@@ -1,49 +1,29 @@
-import React from 'react';
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-  Box,
-} from '@chakra-ui/react';
-import { TODAY } from '@/constants/today';
+import React, { useState } from 'react';
+import { Box, Heading } from '@chakra-ui/react';
+import { Table } from 'react-chakra-pagination';
+import { getColumn } from '@/lib/utils/tableHelper';
 
 const OrderListTable = ({ orderListData }: IOrderListTable) => {
-  const todayData = orderListData.filter((element) =>
-    element.transaction_time.includes(TODAY),
-  );
+  const [page, setPage] = useState(1);
+  const columns = getColumn(orderListData);
 
   return (
-    <Box>
-      <TableContainer>
-        <Table variant="simple">
-          <TableCaption>주문목록 테이블</TableCaption>
-          <Thead>
-            <Tr>
-              {orderListData.length > 0 &&
-                Object.keys(orderListData[0])?.map((column) => (
-                  <Th key={column}>{column}</Th>
-                ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {todayData.map((row) => (
-              <Tr key={row.id}>
-                <Td>{row.id}</Td>
-                <Td>{row.transaction_time}</Td>
-                <Td>{row.status}</Td>
-                <Td>{row.customer_id}</Td>
-                <Td>{row.customer_name}</Td>
-                <Td>{row.currency}</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+    <Box p="12">
+      <Heading size="sm" as="h3">
+        List of Users
+      </Heading>
+
+      <Box mt="6">
+        <Table
+          colorScheme="blue"
+          totalRegisters={orderListData.length}
+          itemsPerPage={50}
+          page={page}
+          onPageChange={(pageNum) => setPage(pageNum)}
+          columns={columns}
+          data={orderListData}
+        />
+      </Box>
     </Box>
   );
 };

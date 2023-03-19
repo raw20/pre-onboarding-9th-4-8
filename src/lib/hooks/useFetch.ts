@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import apiClient from '@/api';
 
-const useFetch = <T>(defaultValue: T, url: string): [T, boolean, boolean] => {
+const useFetch = <T>(
+  defaultValue: T,
+  url: string,
+  preProcessData: ((data: T) => T) | null = null,
+): [T, boolean, boolean] => {
   const [payload, setPayload] = useState(defaultValue);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -10,10 +14,13 @@ const useFetch = <T>(defaultValue: T, url: string): [T, boolean, boolean] => {
     setIsLoading(true);
     apiClient
       .get(url)
-      .then((res) => res.data.length > 0 && setPayload(res.data))
+      .then((res) =>
+        preProcessData === null ? res.data : preProcessData(res.data),
+      )
+      .then((res) => setPayload(res))
       .catch((_) => setIsError(true))
       .finally(() => setIsLoading(false));
-  }, [url]);
+  }, [preProcessData, url]);
 
   return [payload, isLoading, isError];
 };
