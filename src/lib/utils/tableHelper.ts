@@ -1,20 +1,4 @@
 import { createColumn } from 'react-chakra-pagination';
-import { TODAY } from '@/constants/today';
-
-export const transFormTodayData = (res: IOrderList[]) => {
-  const todayData = res
-    .filter((element) => element.transaction_time.includes(TODAY))
-    .map((element) => ({
-      id: element.id,
-      transaction_time: element.transaction_time,
-      status: element.status,
-      customer_id: element.customer_id,
-      customer_name: element.customer_name,
-      currency: element.currency,
-    }));
-
-  return todayData;
-};
 
 export const getColumn = (todayData: IOrderList[]) => {
   const columnHelper = createColumn<(typeof todayData)[0]>();
