@@ -10,10 +10,7 @@ const OrderListTable = ({ orderListData }: IOrderListTable) => {
   const [toggle, setToggle] = useState(false);
   const columns = getColumn(orderListData);
 
-  const pageIndex =
-    searchParams.get('page') !== null
-      ? Number(+searchParams.get('page') - 1)
-      : 1;
+  const pageIndex = Number(searchParams.get('page')) || 1;
   const todayChecked = searchParams?.get('today') === 'true';
   const filterData = orderListData.filter((element) =>
     element.transaction_time.includes(TODAY),
@@ -32,7 +29,7 @@ const OrderListTable = ({ orderListData }: IOrderListTable) => {
             onChange={() => {
               setToggle(!toggle);
               setSearchParams(
-                `page=${encodeURIComponent(pageIndex + 1)}&today=${!toggle}`,
+                `page=${encodeURIComponent(pageIndex)}&today=${!toggle}`,
               );
             }}
           />
@@ -46,7 +43,9 @@ const OrderListTable = ({ orderListData }: IOrderListTable) => {
             todayChecked ? filterData.length : orderListData.length
           }
           itemsPerPage={50}
-          page={pageIndex}
+          page={
+            todayChecked && pageIndex > filterData.length ? 1 : pageIndex - 1
+          }
           onPageChange={(page) => {
             setSearchParams(
               `page=${encodeURIComponent(page)}&today=${todayChecked}`,

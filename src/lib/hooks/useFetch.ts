@@ -2,11 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import apiClient from '@/api';
 import useInterval from './useInterval';
 
-const useFetch = <T>(
-  defaultValue: T,
-  url: string,
-  preProcessData: ((data: T) => T) | null = null,
-): [T, boolean, boolean] => {
+const useFetch = <T>(defaultValue: T, url: string): [T, boolean, boolean] => {
   const [payload, setPayload] = useState(defaultValue);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -14,13 +10,10 @@ const useFetch = <T>(
   const getData = useCallback(() => {
     apiClient
       .get(url)
-      .then((res) =>
-        preProcessData === null ? res.data : preProcessData(res.data),
-      )
-      .then((res) => setPayload(res))
+      .then((res) => setPayload(res.data))
       .catch((_) => setIsError(true))
       .finally(() => setIsLoading(false));
-  }, [preProcessData, url]);
+  }, [url]);
 
   useEffect(() => {
     setIsLoading(true);

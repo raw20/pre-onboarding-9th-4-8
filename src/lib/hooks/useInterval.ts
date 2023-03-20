@@ -14,10 +14,8 @@ const useInterval = (callback: () => void, delay: number | null) => {
       }
     };
 
-    if (delay !== null) {
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
+    const id = setInterval(tick, 5000);
+    return () => clearInterval(id);
+  }, []);
 };
 export default useInterval;
