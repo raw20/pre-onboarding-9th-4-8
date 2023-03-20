@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import apiClient from '@/api';
+import useInterval from './useInterval';
 
 const useFetch = <T>(
   defaultValue: T,
@@ -10,8 +11,7 @@ const useFetch = <T>(
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
+  const getData = useCallback(() => {
     apiClient
       .get(url)
       .then((res) =>
@@ -21,6 +21,15 @@ const useFetch = <T>(
       .catch((_) => setIsError(true))
       .finally(() => setIsLoading(false));
   }, [preProcessData, url]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getData();
+  }, [getData]);
+
+  useInterval(() => {
+    getData();
+  }, 5000);
 
   return [payload, isLoading, isError];
 };
