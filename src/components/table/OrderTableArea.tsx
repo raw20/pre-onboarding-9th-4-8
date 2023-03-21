@@ -22,19 +22,21 @@ import {
 } from '@chakra-ui/icons';
 import { IOrderItem } from '@/interface/main';
 import { formatPageInfo } from '@/lib/utils/formattingHelper';
-import { IOrderTablePros } from '@/interface/props';
+import useSetParams from '@/lib/hooks/useSetParams';
+import useGetOrderData from '@/lib/hooks/useGetOrderData';
 import TableController from './TableController';
 import TablePagination from './TablePagination';
 
-const OrderTableArea = ({
-  currentPage,
-  currentName,
-  currentDate,
-  currentStatus,
-  currentSortOrderId,
-  data,
-  onSetParams,
-}: IOrderTablePros) => {
+const OrderTableArea = () => {
+  const { currentPage, currentDate, currentName, currentStatus, onSetParams } =
+    useSetParams();
+  const { data } = useGetOrderData(
+    currentPage,
+    currentDate,
+    currentName,
+    currentStatus,
+  );
+
   return (
     <Box bg="white" w="100%" borderRadius="2xl" p="1em 2em">
       <Flex minWidth="max-content" alignItems="center" gap="2">
@@ -42,13 +44,7 @@ const OrderTableArea = ({
           <Heading size="md">주문 테이블</Heading>
         </Box>
         <Spacer />
-        <TableController
-          currentName={currentName}
-          currentDate={currentDate}
-          currentStatus={currentStatus}
-          currentSortOrderId={currentSortOrderId}
-          onSetParams={onSetParams}
-        />
+        <TableController />
       </Flex>
       <TableContainer>
         <Table variant="simple">
@@ -79,7 +75,22 @@ const OrderTableArea = ({
               </Th>
               <Th>Status</Th>
               <Th>Customer Name / ID</Th>
-              <Th>Time</Th>
+              <Th>
+                Time{' '}
+                <IconButton
+                  aria-label="오름차순"
+                  icon={<ChevronUpIcon />}
+                  onClick={() => onSetParams({ sortOrderIdValue: 'up' })}
+                />
+                <IconButton
+                  aria-label="내림차순"
+                  icon={
+                    <ChevronDownIcon
+                      onClick={() => onSetParams({ sortOrderIdValue: 'down' })}
+                    />
+                  }
+                />
+              </Th>
               <Th>Currency</Th>
             </Tr>
           </Thead>
@@ -112,11 +123,7 @@ const OrderTableArea = ({
           </Tbody>
         </Table>
       </TableContainer>
-      <TablePagination
-        currentPage={currentPage}
-        data={data}
-        onSetParams={onSetParams}
-      />
+      <TablePagination />
     </Box>
   );
 };

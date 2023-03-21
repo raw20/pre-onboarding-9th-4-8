@@ -14,9 +14,18 @@ import { IoIosPeople } from 'react-icons/io';
 import { TfiMoney } from 'react-icons/tfi';
 import { formatNumToDollar } from '@/lib/utils/formattingHelper';
 import { IOrderItem } from '@/interface/main';
-import { IStatsAreaProps } from '@/interface/props';
+import useSetParams from '@/lib/hooks/useSetParams';
+import useGetOrderData from '@/lib/hooks/useGetOrderData';
 
-const StatsArea = ({ data }: IStatsAreaProps) => {
+const StatsArea = () => {
+  const { currentPage, currentDate, currentName, currentStatus } =
+    useSetParams();
+  const { data } = useGetOrderData(
+    currentPage,
+    currentDate,
+    currentName,
+    currentStatus,
+  );
   const stats = [
     {
       label: 'Total Order',

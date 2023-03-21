@@ -9,9 +9,10 @@ import {
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
-import { ITableControllerProps } from '@/interface/props';
+import useSetParams from '@/lib/hooks/useSetParams';
 
-const SearchCustomerName = ({ onSetParams }: ITableControllerProps) => {
+const SearchCustomerName = () => {
+  const { onSetParams } = useSetParams();
   const [cutomerName, setCustomerName] = useState('');
 
   return (

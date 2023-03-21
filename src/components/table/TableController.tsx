@@ -1,18 +1,15 @@
 import { ButtonGroup, FormControl, FormLabel, Switch } from '@chakra-ui/react';
 import { TODAY } from '@/constants/config';
-import { ITableControllerProps } from '@/interface/props';
+import useSetParams from '@/lib/hooks/useSetParams';
 import SearchCustomerName from '../filter/SearchCustomerName';
 
-const TableController = ({
-  currentDate,
-  currentName,
-  currentStatus,
-  currentSortOrderId,
-  onSetParams,
-}: ITableControllerProps) => {
+const TableController = () => {
+  const { currentDate, currentName, currentStatus, onSetParams } =
+    useSetParams();
+
   return (
     <>
-      <SearchCustomerName currentName={currentName} onSetParams={onSetParams} />
+      <SearchCustomerName />
 
       <ButtonGroup variant="outline" spacing="4">
         <FormControl display="flex" alignItems="center">
@@ -27,16 +24,16 @@ const TableController = ({
                 ? onSetParams({
                     pageValue: 1,
                     dateValue: TODAY,
-                    nameValue: currentName,
-                    statusValue: currentStatus,
-                    sortOrderIdValue: currentSortOrderId,
+                    nameValue: currentName ? currentName : '',
+                    statusValue: currentStatus ? currentStatus : '',
+                    sortOrderIdValue: '',
                   })
                 : onSetParams({
                     pageValue: 1,
                     dateValue: '',
-                    nameValue: currentName,
-                    statusValue: currentStatus,
-                    sortOrderIdValue: currentSortOrderId,
+                    nameValue: currentName ? currentName : '',
+                    statusValue: currentStatus ? currentStatus : '',
+                    sortOrderIdValue: '',
                   })
             }
           />
@@ -52,15 +49,15 @@ const TableController = ({
               e.target.checked
                 ? onSetParams({
                     pageValue: 1,
-                    dateValue: currentDate,
-                    nameValue: currentName,
+                    dateValue: currentDate ? currentDate : '',
+                    nameValue: currentName ? currentName : '',
                     statusValue: 'check',
-                    sortOrderIdValue: currentName,
+                    sortOrderIdValue: '',
                   })
                 : onSetParams({
                     pageValue: 1,
-                    dateValue: currentDate,
-                    nameValue: currentName,
+                    dateValue: currentDate ? currentDate : '',
+                    nameValue: currentName ? currentName : '',
                     statusValue: '',
                     sortOrderIdValue: '',
                   })
