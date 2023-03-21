@@ -18,8 +18,8 @@ import { IOrderItem } from '@/interface/main';
 import useSetParams from '@/lib/hooks/useSetParams';
 import { formatPageInfo } from '@/lib/utils/formattingHelper';
 import useGetOrderData from '@/lib/hooks/useGetOrderData';
-import TablePagination from './TablePagination';
 import TableController from './TableController';
+import TablePagination from './TablePagination';
 
 const OrderTableArea = () => {
   const { currentPage, currentDate } = useSetParams();

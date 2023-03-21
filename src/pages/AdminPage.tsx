@@ -1,6 +1,6 @@
-import StatsArea from '@/components/StatsArea';
-import OrderTableArea from '@/components/OrderTableArea';
-import DatePicker from '@/components/DatePicker';
+import StatsArea from '@/components/stats/StatsArea';
+import OrderTableArea from '@/components/table/OrderTableArea';
+import DatePicker from '@/components/filter/DatePicker';
 
 const AdminPage = () => {
   return (
