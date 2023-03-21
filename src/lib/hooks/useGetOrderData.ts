@@ -5,11 +5,12 @@ const useGetOrderData = (
   pageNum = 1,
   date: string | null,
   name: string | null,
+  status: string | null,
 ) => {
   return useQuery({
-    queryKey: ['/mock/order', pageNum, date],
+    queryKey: ['/mock/order', pageNum, date, name, status],
     queryFn: () =>
-      getOrderData(pageNum - 1, date, name).then((res) => res.data),
+      getOrderData(pageNum - 1, date, name, status).then((res) => res.data),
     refetchInterval: 5000,
   });
 };

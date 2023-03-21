@@ -5,6 +5,7 @@ export const getOrderData = async (
   offset: number,
   date: string | null,
   name: string | null,
+  status: string | null,
 ) => {
   return await apiClient({
     method: 'get',
@@ -13,6 +14,7 @@ export const getOrderData = async (
       offset,
       date,
       name,
+      status,
       limit: ITEMS_PER_PAGE,
     },
   });

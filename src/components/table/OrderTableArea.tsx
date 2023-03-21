@@ -13,7 +13,13 @@ import {
   Flex,
   Heading,
 } from '@chakra-ui/react';
-import { CheckIcon, WarningIcon } from '@chakra-ui/icons';
+import { IconButton } from '@chakra-ui/react';
+import {
+  CheckIcon,
+  WarningIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
+} from '@chakra-ui/icons';
 import { IOrderItem } from '@/interface/main';
 import { formatPageInfo } from '@/lib/utils/formattingHelper';
 import { IOrderTablePros } from '@/interface/props';
@@ -23,6 +29,9 @@ import TablePagination from './TablePagination';
 const OrderTableArea = ({
   currentPage,
   currentName,
+  currentDate,
+  currentStatus,
+  currentSortOrderId,
   data,
   onSetParams,
 }: IOrderTablePros) => {
@@ -33,7 +42,13 @@ const OrderTableArea = ({
           <Heading size="md">주문 테이블</Heading>
         </Box>
         <Spacer />
-        <TableController currentName={currentName} onSetParams={onSetParams} />
+        <TableController
+          currentName={currentName}
+          currentDate={currentDate}
+          currentStatus={currentStatus}
+          currentSortOrderId={currentSortOrderId}
+          onSetParams={onSetParams}
+        />
       </Flex>
       <TableContainer>
         <Table variant="simple">
@@ -46,7 +61,22 @@ const OrderTableArea = ({
           </TableCaption>
           <Thead>
             <Tr>
-              <Th>Order ID</Th>
+              <Th>
+                Order ID
+                <IconButton
+                  aria-label="오름차순"
+                  icon={<ChevronUpIcon />}
+                  onClick={() => onSetParams({ sortOrderIdValue: 'up' })}
+                />
+                <IconButton
+                  aria-label="내림차순"
+                  icon={
+                    <ChevronDownIcon
+                      onClick={() => onSetParams({ sortOrderIdValue: 'down' })}
+                    />
+                  }
+                />
+              </Th>
               <Th>Status</Th>
               <Th>Customer Name / ID</Th>
               <Th>Time</Th>
