@@ -31,25 +31,25 @@ export const orderListHandlers = [
         )
       : dataOfSelectedDate;
 
-    const dataOfSortedOrderParams = generateSortedOrder(
-      dataOfSelectedName,
-      sortOrder,
-    );
-
     const dataOfSelectedStatus =
       status === 'check'
-        ? dataOfSortedOrderParams.filter((item) => item.status)
-        : dataOfSortedOrderParams;
+        ? dataOfSelectedName.filter((item) => item.status)
+        : dataOfSelectedName;
 
-    const { startDate, endDate } =
-      generateStartAndEndDate(dataOfSelectedStatus);
-
+    const dataOfSortedOrderParams = generateSortedOrder(
+      dataOfSelectedStatus,
+      sortOrder,
+    );
+    const { startDate, endDate } = generateStartAndEndDate(
+      dataOfSortedOrderParams,
+    );
+    console.log(name, sortOrder, dataOfSortedOrderParams);
     return res(
       ctx.json({
-        order: [...dataOfSelectedStatus].splice(offset * limit, limit),
+        order: [...dataOfSortedOrderParams].splice(offset * limit, limit),
         orderInfo: {
-          totalCount: dataOfSelectedStatus.length,
-          totalCurrency: dataOfSelectedStatus.reduce(
+          totalCount: dataOfSortedOrderParams.length,
+          totalCurrency: dataOfSortedOrderParams.reduce(
             (acc, cur) => acc + formatDollarToNumber(cur.currency),
             0,
           ),

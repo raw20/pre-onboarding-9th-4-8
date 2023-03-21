@@ -83,17 +83,19 @@ const OrderTableArea = () => {
               <Th>Status</Th>
               <Th>Customer Name / ID</Th>
               <Th>
-                Time{' '}
+                Time
                 <IconButton
                   aria-label="오름차순"
                   icon={<ChevronUpIcon />}
-                  onClick={() => onSetParams({ sortOrderValue: 'up' })}
+                  onClick={() => onSetParams({ sortOrderValue: 'TIMEup' })}
                 />
                 <IconButton
                   aria-label="내림차순"
                   icon={
                     <ChevronDownIcon
-                      onClick={() => onSetParams({ sortOrderValue: 'down' })}
+                      onClick={() =>
+                        onSetParams({ sortOrderValue: 'TIMEdown' })
+                      }
                     />
                   }
                 />
