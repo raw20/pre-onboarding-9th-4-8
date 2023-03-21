@@ -43,7 +43,7 @@ export const orderListHandlers = [
     const { startDate, endDate } = generateStartAndEndDate(
       dataOfSortedOrderParams,
     );
-    console.log(name, sortOrder, dataOfSortedOrderParams);
+
     return res(
       ctx.json({
         order: [...dataOfSortedOrderParams].splice(offset * limit, limit),
