@@ -10,8 +10,6 @@ const TableController = ({
   currentSortOrderId,
   onSetParams,
 }: ITableControllerProps) => {
-  console.log(currentStatus);
-
   return (
     <>
       <SearchCustomerName currentName={currentName} onSetParams={onSetParams} />
