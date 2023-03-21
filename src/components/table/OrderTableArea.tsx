@@ -15,16 +15,17 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon, WarningIcon } from '@chakra-ui/icons';
 import { IOrderItem } from '@/interface/main';
-import useSetParams from '@/lib/hooks/useSetParams';
 import { formatPageInfo } from '@/lib/utils/formattingHelper';
-import useGetOrderData from '@/lib/hooks/useGetOrderData';
+import { IOrderTablePros } from '@/interface/props';
 import TableController from './TableController';
 import TablePagination from './TablePagination';
 
-const OrderTableArea = () => {
-  const { currentPage, currentDate } = useSetParams();
-  const { data } = useGetOrderData(currentPage, currentDate);
-
+const OrderTableArea = ({
+  currentPage,
+  currentName,
+  data,
+  onSetParams,
+}: IOrderTablePros) => {
   return (
     <Box bg="white" w="100%" borderRadius="2xl" p="1em 2em">
       <Flex minWidth="max-content" alignItems="center" gap="2">
@@ -32,13 +33,13 @@ const OrderTableArea = () => {
           <Heading size="md">주문 테이블</Heading>
         </Box>
         <Spacer />
-        <TableController />
+        <TableController currentName={currentName} onSetParams={onSetParams} />
       </Flex>
       <TableContainer>
         <Table variant="simple">
           <TableCaption>
             {formatPageInfo(
-              currentPage,
+              currentPage ? currentPage : 1,
               data.order.length,
               data.orderInfo.totalCount,
             )}
@@ -81,7 +82,11 @@ const OrderTableArea = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <TablePagination />
+      <TablePagination
+        currentPage={currentPage}
+        data={data}
+        onSetParams={onSetParams}
+      />
     </Box>
   );
 };

@@ -14,12 +14,14 @@ export interface IOrderInfo {
   totalCurrency: number;
 }
 
+export interface IOrderData {
+  order: IOrderItem[];
+  orderInfo: IOrderInfo;
+}
+
 export interface IOnSetParams {
   pageValue?: number;
   dateValue?: string;
+  nameValue?: string;
   event?: React.ChangeEvent<HTMLInputElement>;
-}
-
-export interface IErrorFallbackProps {
-  resetErrorBoundary: (...args: unknown[]) => void;
 }

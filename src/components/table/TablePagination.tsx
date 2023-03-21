@@ -1,13 +1,13 @@
 import { Button, Stack } from '@chakra-ui/react';
-import useSetParams from '@/lib/hooks/useSetParams';
 import { ITEMS_PER_PAGE } from '@/constants/units';
 import { generateZeroToNArr } from '@/lib/utils/generator';
-import useGetOrderData from '@/lib/hooks/useGetOrderData';
+import { IOrderTablePros } from '@/interface/props';
 
-const TablePagination = () => {
-  const { currentPage, currentDate, onSetParams } = useSetParams();
-  const { data } = useGetOrderData(currentPage, currentDate);
-
+const TablePagination = ({
+  currentPage,
+  data,
+  onSetParams,
+}: IOrderTablePros) => {
   return (
     <Stack spacing={2} direction="row" align="center">
       {generateZeroToNArr(

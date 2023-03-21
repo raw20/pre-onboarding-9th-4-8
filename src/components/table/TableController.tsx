@@ -1,27 +1,36 @@
 import { Button, ButtonGroup } from '@chakra-ui/react';
-import useSetParams from '@/lib/hooks/useSetParams';
 import { TODAY } from '@/constants/config';
+import { ITableControllerProps } from '@/interface/props';
+import SearchCustomerName from '../filter/SearchCustomerName';
 
-const TableController = () => {
-  const { onSetParams } = useSetParams();
-
+const TableController = ({
+  currentName,
+  onSetParams,
+}: ITableControllerProps) => {
   return (
-    <ButtonGroup variant="outline" spacing="4">
-      <Button
-        colorScheme="blue"
-        size="sm"
-        onClick={() => onSetParams({ pageValue: 1, dateValue: '' })}
-      >
-        전체 주문보기
-      </Button>
-      <Button
-        colorScheme="blue"
-        size="sm"
-        onClick={() => onSetParams({ pageValue: 1, dateValue: TODAY })}
-      >
-        오늘의 주문보기
-      </Button>
-    </ButtonGroup>
+    <>
+      <SearchCustomerName currentName={currentName} onSetParams={onSetParams} />
+      <ButtonGroup variant="outline" spacing="4">
+        <Button
+          colorScheme="blue"
+          size="sm"
+          onClick={() =>
+            onSetParams({ pageValue: 1, dateValue: '', nameValue: '' })
+          }
+        >
+          전체 주문보기
+        </Button>
+        <Button
+          colorScheme="blue"
+          size="sm"
+          onClick={() =>
+            onSetParams({ pageValue: 1, dateValue: TODAY, nameValue: '' })
+          }
+        >
+          오늘의 주문보기
+        </Button>
+      </ButtonGroup>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { Button, Center, Heading } from '@chakra-ui/react';
-import { IErrorFallbackProps } from '@/interface/main';
+import { IErrorFallbackProps } from '@/interface/props';
 
 const ErrorFallback = ({ resetErrorBoundary }: IErrorFallbackProps) => {
   return (
