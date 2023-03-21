@@ -28,13 +28,20 @@ import TableController from './TableController';
 import TablePagination from './TablePagination';
 
 const OrderTableArea = () => {
-  const { currentPage, currentDate, currentName, currentStatus, onSetParams } =
-    useSetParams();
+  const {
+    currentPage,
+    currentDate,
+    currentName,
+    currentStatus,
+    currentSortOrder,
+    onSetParams,
+  } = useSetParams();
   const { data } = useGetOrderData(
     currentPage,
     currentDate,
     currentName,
     currentStatus,
+    currentSortOrder,
   );
 
   return (
@@ -62,13 +69,13 @@ const OrderTableArea = () => {
                 <IconButton
                   aria-label="오름차순"
                   icon={<ChevronUpIcon />}
-                  onClick={() => onSetParams({ sortOrderIdValue: 'up' })}
+                  onClick={() => onSetParams({ sortOrderValue: 'IDup' })}
                 />
                 <IconButton
                   aria-label="내림차순"
                   icon={
                     <ChevronDownIcon
-                      onClick={() => onSetParams({ sortOrderIdValue: 'down' })}
+                      onClick={() => onSetParams({ sortOrderValue: 'IDdown' })}
                     />
                   }
                 />
@@ -80,13 +87,13 @@ const OrderTableArea = () => {
                 <IconButton
                   aria-label="오름차순"
                   icon={<ChevronUpIcon />}
-                  onClick={() => onSetParams({ sortOrderIdValue: 'up' })}
+                  onClick={() => onSetParams({ sortOrderValue: 'up' })}
                 />
                 <IconButton
                   aria-label="내림차순"
                   icon={
                     <ChevronDownIcon
-                      onClick={() => onSetParams({ sortOrderIdValue: 'down' })}
+                      onClick={() => onSetParams({ sortOrderValue: 'down' })}
                     />
                   }
                 />

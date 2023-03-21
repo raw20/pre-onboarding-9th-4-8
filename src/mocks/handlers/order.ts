@@ -1,11 +1,13 @@
 import { rest } from 'msw';
 import { formatDollarToNumber } from '@/lib/utils/formattingHelper';
-import { generateStartAndEndDate } from '@/lib/utils/generator';
+import {
+  generateSortedOrder,
+  generateStartAndEndDate,
+} from '@/lib/utils/generator';
 import {
   DATE_QUERY_KEY,
   NAME_QUERY_KEY,
-  SORTORDERID_QUERY_KEY,
-  SORTTIME_QUERY_KEY,
+  SORT_QUERY_KEY,
   STATUS_QUERY_KEY,
 } from '@/constants/queryKey';
 import mockData from '../storage/mock_data.json';
@@ -17,8 +19,7 @@ export const orderListHandlers = [
     const date = req.url.searchParams.get(DATE_QUERY_KEY);
     const name = req.url.searchParams.get(NAME_QUERY_KEY) || '';
     const status = req.url.searchParams.get(STATUS_QUERY_KEY);
-    const sortOrderID = req.url.searchParams.get(SORTORDERID_QUERY_KEY);
-    const sortTIME = req.url.searchParams.get(SORTTIME_QUERY_KEY);
+    const sortOrder = req.url.searchParams.get(SORT_QUERY_KEY);
 
     const dataOfSelectedDate = date
       ? mockData.filter((item) => item.transaction_time.split(' ')[0] === date)
@@ -30,12 +31,18 @@ export const orderListHandlers = [
         )
       : dataOfSelectedDate;
 
+    const dataOfSortedOrderParams = generateSortedOrder(
+      dataOfSelectedName,
+      sortOrder,
+    );
+
     const dataOfSelectedStatus =
       status === 'check'
-        ? dataOfSelectedName.filter((item) => item.status)
-        : dataOfSelectedName;
+        ? dataOfSortedOrderParams.filter((item) => item.status)
+        : dataOfSortedOrderParams;
 
-    const { startDate, endDate } = generateStartAndEndDate(dataOfSelectedName);
+    const { startDate, endDate } =
+      generateStartAndEndDate(dataOfSelectedStatus);
 
     return res(
       ctx.json({

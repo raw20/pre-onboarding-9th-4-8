@@ -6,11 +6,14 @@ const useGetOrderData = (
   date: string | null,
   name: string | null,
   status: string | null,
+  sortOrder: string | null,
 ) => {
   return useQuery({
-    queryKey: ['/mock/order', pageNum, date, name, status],
+    queryKey: ['/mock/order', pageNum, date, name, status, sortOrder],
     queryFn: () =>
-      getOrderData(pageNum - 1, date, name, status).then((res) => res.data),
+      getOrderData(pageNum - 1, date, name, status, sortOrder).then(
+        (res) => res.data,
+      ),
     refetchInterval: 5000,
   });
 };

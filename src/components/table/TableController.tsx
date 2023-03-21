@@ -4,8 +4,13 @@ import useSetParams from '@/lib/hooks/useSetParams';
 import SearchCustomerName from '../filter/SearchCustomerName';
 
 const TableController = () => {
-  const { currentDate, currentName, currentStatus, onSetParams } =
-    useSetParams();
+  const {
+    currentDate,
+    currentName,
+    currentStatus,
+    currentSortOrder,
+    onSetParams,
+  } = useSetParams();
 
   return (
     <>
@@ -26,14 +31,14 @@ const TableController = () => {
                     dateValue: TODAY,
                     nameValue: currentName ? currentName : '',
                     statusValue: currentStatus ? currentStatus : '',
-                    sortOrderIdValue: '',
+                    sortOrderValue: currentSortOrder ? currentSortOrder : '',
                   })
                 : onSetParams({
                     pageValue: 1,
                     dateValue: '',
                     nameValue: currentName ? currentName : '',
                     statusValue: currentStatus ? currentStatus : '',
-                    sortOrderIdValue: '',
+                    sortOrderValue: currentSortOrder ? currentSortOrder : '',
                   })
             }
           />
@@ -52,14 +57,14 @@ const TableController = () => {
                     dateValue: currentDate ? currentDate : '',
                     nameValue: currentName ? currentName : '',
                     statusValue: 'check',
-                    sortOrderIdValue: '',
+                    sortOrderValue: currentSortOrder ? currentSortOrder : '',
                   })
                 : onSetParams({
                     pageValue: 1,
                     dateValue: currentDate ? currentDate : '',
                     nameValue: currentName ? currentName : '',
                     statusValue: '',
-                    sortOrderIdValue: '',
+                    sortOrderValue: currentSortOrder ? currentSortOrder : '',
                   })
             }
           />

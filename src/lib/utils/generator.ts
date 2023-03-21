@@ -16,3 +16,29 @@ export const generateStartAndEndDate = (data: IOrderItem[]) => {
 };
 
 export const generateZeroToNArr = (n: number) => Array.from(Array(n).keys());
+export const generateSortedOrder = (
+  order: IOrderItem[],
+  sortOrder: string | null,
+) => {
+  return order.sort((a, b) => {
+    if (sortOrder === 'IDup') {
+      return a.id - b.id;
+    }
+    if (sortOrder === 'IDdown') {
+      return b.id - a.id;
+    }
+    if (sortOrder === 'TIMEup') {
+      return (
+        Number(new Date(a.transaction_time)) -
+        Number(new Date(b.transaction_time))
+      );
+    }
+    if (sortOrder === 'TIMEdown') {
+      return (
+        Number(new Date(b.transaction_time)) -
+        Number(new Date(a.transaction_time))
+      );
+    }
+    return a.id - b.id;
+  });
+};

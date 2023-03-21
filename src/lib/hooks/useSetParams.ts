@@ -4,7 +4,7 @@ import {
   DATE_QUERY_KEY,
   NAME_QUERY_KEY,
   PAGE_QUERY_KEY,
-  SORTORDERID_QUERY_KEY,
+  SORT_QUERY_KEY,
   STATUS_QUERY_KEY,
 } from '@/constants/queryKey';
 
@@ -14,13 +14,14 @@ const useSetParams = () => {
   const currentDate = searchParams.get(DATE_QUERY_KEY);
   const currentName = searchParams.get(NAME_QUERY_KEY);
   const currentStatus = searchParams.get(STATUS_QUERY_KEY);
-  const currentSortOrderId = searchParams.get(SORTORDERID_QUERY_KEY);
+  const currentSortOrder = searchParams.get(SORT_QUERY_KEY);
+
   const onSetParams = ({
     pageValue,
     dateValue,
     nameValue,
     statusValue,
-    sortOrderIdValue,
+    sortOrderValue,
     event,
   }: IOnSetParams) => {
     if (pageValue !== undefined)
@@ -31,8 +32,9 @@ const useSetParams = () => {
       searchParams.set(NAME_QUERY_KEY, String(nameValue));
     if (statusValue !== undefined)
       searchParams.set(STATUS_QUERY_KEY, String(statusValue));
-    if (sortOrderIdValue !== undefined)
-      searchParams.set(SORTORDERID_QUERY_KEY, String(sortOrderIdValue));
+    if (sortOrderValue !== undefined)
+      searchParams.set(SORT_QUERY_KEY, String(sortOrderValue));
+
     if (event) searchParams.set(DATE_QUERY_KEY, String(event.target.value));
 
     setSearchParams(searchParams);
@@ -44,7 +46,7 @@ const useSetParams = () => {
     currentDate,
     currentName,
     currentStatus,
-    currentSortOrderId,
+    currentSortOrder,
     onSetParams,
   };
 };

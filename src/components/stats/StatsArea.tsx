@@ -18,13 +18,19 @@ import useSetParams from '@/lib/hooks/useSetParams';
 import useGetOrderData from '@/lib/hooks/useGetOrderData';
 
 const StatsArea = () => {
-  const { currentPage, currentDate, currentName, currentStatus } =
-    useSetParams();
+  const {
+    currentPage,
+    currentDate,
+    currentName,
+    currentStatus,
+    currentSortOrder,
+  } = useSetParams();
   const { data } = useGetOrderData(
     currentPage,
     currentDate,
     currentName,
     currentStatus,
+    currentSortOrder,
   );
   const stats = [
     {

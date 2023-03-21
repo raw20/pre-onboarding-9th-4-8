@@ -5,13 +5,20 @@ import useGetOrderData from '@/lib/hooks/useGetOrderData';
 import useSetParams from '@/lib/hooks/useSetParams';
 
 const TablePagination = () => {
-  const { currentPage, currentDate, currentName, currentStatus, onSetParams } =
-    useSetParams();
+  const {
+    currentPage,
+    currentDate,
+    currentName,
+    currentStatus,
+    currentSortOrder,
+    onSetParams,
+  } = useSetParams();
   const { data } = useGetOrderData(
     currentPage,
     currentDate,
     currentName,
     currentStatus,
+    currentSortOrder,
   );
 
   return (
