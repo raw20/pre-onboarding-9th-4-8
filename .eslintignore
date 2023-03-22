@@ -2,3 +2,5 @@
 craco.config.js
 /public
 jest.config.js
+App.test.tsx
+AdminPage.test.tsx
