@@ -1,5 +1,5 @@
-import StatsArea from '@/components/StatsArea';
-import OrderTableArea from '@/components/OrderTableArea';
+import StatsArea from '@/components/table/StatsArea';
+import OrderTableArea from '@/components/table/OrderTableArea';
 
 const AdminPage = () => {
   return (

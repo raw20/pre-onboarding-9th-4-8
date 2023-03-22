@@ -3,9 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Layout from '@/components/Layout';
-import ErrorFallback from '@/components/ErrorFallback';
-import LoadingFallback from './components/LoadingFallback';
-
+import LoadingFallback from './components/fallback/LoadingFallback';
+import ErrorFallback from './components/fallback/ErrorFallback';
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 const Router = () => {

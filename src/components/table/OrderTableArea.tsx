@@ -17,9 +17,9 @@ import { IOrderItem } from '@/interface/main';
 import useQueryString from '@/lib/hooks/useQueryString';
 import { formatPageInfo } from '@/lib/utils/formatter';
 import useOrderQuery from '@/lib/hooks/useOrderQuery';
+import SortButton from '../SortButton';
 import TablePagination from './TablePagination';
 import TableController from './TableController';
-import SortButton from './SortButton';
 
 const OrderTableArea = () => {
   const { getParams } = useQueryString();

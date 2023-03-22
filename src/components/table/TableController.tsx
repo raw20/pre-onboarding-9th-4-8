@@ -21,7 +21,7 @@ import { FiFilter } from 'react-icons/fi';
 import { useRef } from 'react';
 import useQueryString from '@/lib/hooks/useQueryString';
 import { TODAY } from '@/constants/config';
-import SearchSideDrawer from './SearchSideDrawer';
+import SearchSideDrawer from '../sideDraw/SearchSideDrawer';
 
 const TableController = () => {
   const { getParams, setParams, deleteAllParams, deleteParams } =
