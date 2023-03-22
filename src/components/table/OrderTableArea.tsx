@@ -17,7 +17,7 @@ import { IOrderItem } from '@/interface/main';
 import useQueryString from '@/lib/hooks/useQueryString';
 import { formatPageInfo } from '@/lib/utils/formatter';
 import useOrderQuery from '@/lib/hooks/useOrderQuery';
-import SortButton from '../SortButton';
+import SortButton from '../filter/SortButton';
 import TablePagination from './TablePagination';
 import TableController from './TableController';
 
